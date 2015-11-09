@@ -1,0 +1,23 @@
+{
+  "name": "jsreport-sample-template",
+  "version": "0.0.1",
+  "description": "jsreport extension which creates a sample template at the first run",
+  "scripts": {
+    "test": "standard"
+  },
+  "keywords": [
+    "jsreport"
+  ],
+  "standard": {
+    "ignore": [
+      "lib/sample/**"
+    ]
+  },
+  "license": "LGPL",
+  "dependencies": {},
+  "author": "Jan Blaha",
+  "devDependencies": {
+    "eslint": "^1.9.0",
+    "standard": "^5.3.1"
+  }
+}
