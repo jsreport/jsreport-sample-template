@@ -5,6 +5,11 @@
   "scripts": {
     "test": "standard"
   },
+  "homepage": "https://github.com/jsreport/jsreport-sample-template",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jsreport/jsreport-sample-template.git"
+  },
   "keywords": [
     "jsreport"
   ],
