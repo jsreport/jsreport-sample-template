@@ -15,12 +15,13 @@
   ],
   "standard": {
     "ignore": [
-      "lib/sample/**"
+      "lib/samples/**"
     ]
   },
   "license": "LGPL",
   "dependencies": {
-    "bluebird": "3.4.7"
+    "bluebird": "3.4.7",
+    "lodash.omit": "4.5.0"
   },
   "author": "Jan Blaha",
   "devDependencies": {
