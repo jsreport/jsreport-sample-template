@@ -1,4 +1,6 @@
 # jsreport-sample-template
+[![NPM Version](http://img.shields.io/npm/v/jsreport-sample-template.svg?style=flat-square)](https://npmjs.com/package/jsreport-sample-template)
+[![Build Status](https://travis-ci.org/jsreport/jsreport-sample-template.png?branch=master)](https://travis-ci.org/jsreport/jsreport-sample-template)
 
 jsreport extension which creates sample templates at the first run
 
