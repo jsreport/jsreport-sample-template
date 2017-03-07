@@ -3,7 +3,7 @@
   "version": "1.1.1-beta",
   "description": "jsreport extension which creates a sample template at the first run",
   "scripts": {
-    "test": "npm run build&&mocha test --timeout 5000 && standard",
+    "test": "npm run build && mocha test --timeout 5000 && standard",
     "build": "node lib/prepublish.js",
     "prepublish": "in-publish && npm run build || not-in-publish"
   },
