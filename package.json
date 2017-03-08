@@ -1,6 +1,6 @@
 {
   "name": "jsreport-sample-template",
-  "version": "1.1.1-beta",
+  "version": "1.1.1",
   "description": "jsreport extension which creates a sample template at the first run",
   "scripts": {
     "test": "npm run build && mocha test --timeout 10000 && standard",
