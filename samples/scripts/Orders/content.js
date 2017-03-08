@@ -15,6 +15,7 @@ function getOrders(country, cb) {
 }
 
 function beforeRender(req, res, done) {
+    // the report parameter country can be send from the client API request
     req.data.country = req.data.country || 'France'
     getOrders(req.data.country, (err, json) => {        
         if (err) {

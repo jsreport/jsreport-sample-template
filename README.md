@@ -11,7 +11,7 @@ If you use `jsreport-core`, you can apply this extension manually and [pass conf
 
 ```js
 var jsreport = require('jsreport-core')();
-jsreport.use(require('jsreport-sample-template')({}));
+jsreport.use(require('jsreport-sample-template')({createSamples: true}));
 ```
 
 Configuration
@@ -23,8 +23,8 @@ Available options:
 
 ```js
 "sample-template": {
-  /* when true, it will create all samples defined in the extension */
-  allExamples: false,
+  /* when true, it will create defined samples*/
+  createSamples: true,
   /*
     by default samples will be created only on the first run of your jsreport installation,
     when this option is true it will allow to create the samples in the next run

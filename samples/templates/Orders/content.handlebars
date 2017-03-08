@@ -1,3 +1,11 @@
+<!-- 
+Custom server side script is used to fetch data from the remote REST API server,
+handlebars to render html and phantom-pdf recipe to convert html into pdf.
+The template also uses helper function toJSON defined in global helpers asset.
+
+It requires allowed http module in scripts in the configuration file:
+"scripts": { "allowedModules": ["http"] }
+!-->
 <html>
   <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">

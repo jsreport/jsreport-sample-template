@@ -21,13 +21,13 @@ describe('sample', function () {
     reporter.use(assets())
     reporter.use(handlebars())
     reporter.use(phantomPdf())
-    reporter.use(samples({allExamples: true}))
+    reporter.use(samples({createSamples: true}))
 
     return reporter.init()
   })
 
   it('should be able to render all sample templates', function () {
-    var reports = ['Excel Chart report', 'Sample report', 'Orders report']
+    var reports = ['Invoice', 'Orders', 'Population']
     return Promise.all(reports.map(function (t) {
       return reporter.render({ template: { name: t } })
     }))
