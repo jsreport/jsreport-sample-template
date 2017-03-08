@@ -38,7 +38,7 @@
     "jsreport-assets": "0.6.3",
     "jsreport-core": "1.2.1",
     "jsreport-data": "1.1.0",
-    "jsreport-fs-store": "1.1.1",
+    "jsreport-fs-store": "1.2.0",
     "jsreport-handlebars": "1.1.0",
     "jsreport-phantom-pdf": "1.4.0",
     "jsreport-scripts": "1.4.1",
