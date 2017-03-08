@@ -51,7 +51,7 @@
   "files": [
     "lib",
     "index.js",
-    "samples.js",
+    "samples.json",
     "jsreport.config.js"
   ]
 }
