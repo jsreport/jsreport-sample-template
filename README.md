@@ -4,8 +4,7 @@
 
 jsreport extension which creates sample templates at the first run
 
-jsreport-core
--------------
+## jsreport-core
 
 If you use `jsreport-core`, you can apply this extension manually and [pass configuration](#configuration) to it directly:
 
@@ -14,8 +13,7 @@ var jsreport = require('jsreport-core')();
 jsreport.use(require('jsreport-sample-template')({createSamples: true}));
 ```
 
-Configuration
--------------
+## Configuration
 
 Use `sample-template` key in the standard [jsreport config](https://github.com/jsreport/jsreport/blob/master/config.md) file.
 
