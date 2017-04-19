@@ -28,7 +28,7 @@
   "license": "LGPL",
   "dependencies": {
     "bluebird": "3.5.0",
-    "jsreport-import-export": "0.2.0",
+    "jsreport-import-export": "0.3.1",
     "lodash.omit": "4.5.0"
   },
   "author": "Jan Blaha",
