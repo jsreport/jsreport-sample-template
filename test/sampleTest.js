@@ -20,7 +20,11 @@ describe('sample', function () {
     reporter.use(scripts({allowedModules: '*'}))
     reporter.use(assets())
     reporter.use(handlebars())
-    reporter.use(chromePdf())
+    reporter.use(chromePdf({
+      launchOptions: {
+        args: ['--no-sandbox']
+      }
+    }))
     reporter.use(samples({createSamples: true}))
 
     return reporter.init()
