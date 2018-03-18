@@ -30,5 +30,6 @@ build/Release
 node_modules
 
 .idea
-samples.json
+# temporary include
+# samples.json
 samples/settings
