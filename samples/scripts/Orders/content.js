@@ -1,43 +1,56 @@
-// custom server side script used to fetch data from remote REST API
-var http = require('http');
+// server side script fetching remote data and preparing report data source
+const http = require('http');
 
-function getOrders(country, cb) {
-    http.get({
-        hostname: 'services.odata.org',
-        port: 80,
-        path: `/V4/Northwind/Northwind.svc/Orders?$filter=${encodeURI(`ShipCountry eq '${country}'`)}`,
-    }, (result) => {
-        var str = '';
-        result.on('data', (b) => str += b);
-        result.on('error', cb);
-        result.on('end', () => cb(null, JSON.parse(str)));
-    });
+// call remote http rest api
+function fetchOrders() {
+    return new Promise((resolve, reject) => {
+        http.get({
+            hostname: 'services.odata.org',
+            port: 80,
+            path: `/V4/Northwind/Northwind.svc/Orders`,
+        }, (result) => {
+            var str = '';
+            result.on('data', (b) => str += b);
+            result.on('error', reject);
+            result.on('end', () => resolve(JSON.parse(str).value));
+        });
+    })
 }
 
-function beforeRender(req, res, done) {
-    // the report parameter country can be send from the client API request
-    req.data.country = req.data.country || 'France'
-    getOrders(req.data.country, (err, json) => {        
-        if (err) {
-            return done(err);
-        }
-        
-        var orders = json.value;
-        var ordersByQuarter = {};
-        
-        orders.forEach((o) => {
+// group the data for report
+async function prepareDataSource() {
+    const orders = await fetchOrders()
+    const ordersByShipCountry = orders.reduce((a, v) => {
+        a[v.ShipCountry] = a[v.ShipCountry] || []
+        a[v.ShipCountry].push(v)
+        return a
+    }, {})
+
+    return Object.keys(ordersByShipCountry).map((country) => {
+        const ordersInCountry = ordersByShipCountry[country]
+
+        const accumulated = {}
+
+        ordersInCountry.forEach((o) => {
             o.OrderDate = new Date(o.OrderDate);
-            var key = o.OrderDate.getFullYear() + '/' + (o.OrderDate.getMonth() + 1);
-            ordersByQuarter[key] = ordersByQuarter[key] || {
+            const key = o.OrderDate.getFullYear() + '/' + (o.OrderDate.getMonth() + 1);
+            accumulated[key] = accumulated[key] || {
                 value: 0,
                 orderDate: o.OrderDate
             };
-            ordersByQuarter[key].value++;
+            accumulated[key].value++;
         });
 
-        req.data.orders = orders;
-        req.data.accumulatedOrders = ordersByQuarter;
+        return {
+            rows: ordersInCountry,
+            country,
+            accumulated
+        }
 
-        done();
-    });
+    }).slice(0, 2)
+}
+
+// add jsreport hook which modifies the report input data
+async function beforeRender(req, res) {
+    req.data.orders = await prepareDataSource()
 }

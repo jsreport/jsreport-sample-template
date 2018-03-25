@@ -1,77 +1,83 @@
 <!-- 
-Custom server side script is used to fetch data from the remote REST API server,
-handlebars to render html and phantom-pdf recipe to convert html into pdf.
-The template also uses helper function toJSON defined in global helpers asset.
+More complex example demonstrating advanced features like
+- using custom server script to fetch remote data
+- using custom modules in safe sandbox
+- panting a chart
+- using global helpers
+- merging custom dynamic header for each individual page
 
-It requires allowed http module in scripts in the configuration file:
-"scripts": { "allowedModules": ["http"] }
+Note: This example requires jsreport to be configured with 
+{ "renderingSource": "trusted" } or
+{ "extensions": { "scripts": { "allowedModules": ["http"] } } }
 !-->
 <html>
   <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <link rel="stylesheet" href="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/css/metro.min.css">
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/metro/4.1.5/css/metro.min.css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js'></script>
   </head>
   <body>
-    <h1>{{country}}</h1>
-    
-    <canvas id='orders' style="margin-top:30px"></canvas>
-    <table class="table striped">
-        <thead>
-            <tr>
-                <th>OrderID</th>
-                <th>ShipAddress</th>
-                <th>ShipCity</th>
-                <th>ShipCountry</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each orders}}
-            <tr>
-                <td>{{OrderID}}</td>
-                <td>{{ShipAddress}}</td>
-                <td>{{ShipCity}}</td>
-                <td>{{ShipCountry}}</td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
-    
-    <script>      
-        var data = {{{toJSON this}}}
+    {{#each orders}}
+        <!-- add hiden information to the page which is resolved in OrdersHeader template
+             during the pdf merge. See the docs about pdf utils extension for more details. -->
+        {{{pdfCreatePagesGroup country}}}
+        <canvas id='orders{{country}}' style="margin-bottom:30px"></canvas>
+        <table class='table striped'>
+            <thead>
+                <tr>
+                    <th>OrderID</th>
+                    <th>ShipAddress</th>
+                    <th>ShipCity</th>
+                    <th>ShipCountry</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each rows}}
+                <tr>
+                    <td>{{OrderID}}</td>
+                    <td>{{ShipAddress}}</td>
+                    <td>{{ShipCity}}</td>
+                    <td>{{ShipCountry}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
         
-        Chart.defaults.global.legend.display = false;
-        
-        new Chart(orders.getContext("2d"), {
-            type: 'bar',
-            data: {
-                labels: Object.keys(data.accumulatedOrders),
-                datasets: [{
-                    fillColor: 'blue',
-                    label: "Orders in time",
-                    backgroundColor: "rgba(27,161,226,0.2)",
-                    borderColor: "rgba(27,161,226,1)",
-                    borderWidth: 1,
-                    hoverBackgroundColor: "rgba(27,161,226,0.4)",
-                    hoverBorderColor: "rgba(27,161,226,1)",
-                    data: Object.keys(data.accumulatedOrders).map(function (o) {
-                        return data.accumulatedOrders[o].value;
-                    })
-                }]
-                
-            },
-            options: {
-                animation: {
-                    onComplete: function () {
-                        // set the PDF printing trigger when the animation is done
-                        // to have this working, the phantom-pdf menu in the left must
-                        // have the wait for printing trigger option selected
-                        window.JSREPORT_READY_TO_START = true
+        <script>      
+            // convert data into js string using function from asset global helpers.js
+            // this results into something like var data = { "a": "foo" }
+            // which gets afterwards interpreted in chrome into object
+            var data = {{{toJSON accumulated}}}
+            
+            Chart.defaults.global.legend.display = false;
+            
+            new Chart(orders{{country}}.getContext("2d"), {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(data),
+                    datasets: [{
+                        fillColor: 'blue',
+                        label: "Orders in time",
+                        backgroundColor: "rgba(27,161,226,0.2)",
+                        borderColor: "rgba(27,161,226,1)",
+                        borderWidth: 1,
+                        hoverBackgroundColor: "rgba(27,161,226,0.4)",
+                        hoverBorderColor: "rgba(27,161,226,1)",
+                        data: Object.keys(data).map(function (o) {
+                            return data[o].value;
+                        })
+                    }]
+                },
+                options: {
+                    animation: {
+                        duration: 0
                     }
                 }
-            }
-        });
-    </script>    
+            });
+        </script> 
+        <div style='page-break-after: always;'>
+        </div>
+    {{/each}}
   </body>
 </html>
 
