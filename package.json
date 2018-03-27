@@ -29,7 +29,7 @@
   "dependencies": {
     "bluebird": "3.5.1",
     "in-publish": "2.0.0",
-    "jsreport-import-export": "jsreport/jsreport-import-export#2.0.0-beta",
+    "jsreport-import-export": "jsreport/jsreport-import-export#4c041ba9d866a99f03cab928ad40131883bc9a0f",
     "lodash.omit": "4.5.0"
   },
   "author": "Jan Blaha",
