@@ -1,7 +1,19 @@
+
 module.exports = {
   'name': 'sample-template',
   'main': 'lib/sample.js',
-  'dependencies': [ 'templates', 'data', 'phantom-pdf' ],
+  'optionsSchema': {
+    extensions: {
+      'sample-template': {
+        type: 'object',
+        properties: {
+          createSamples: { type: 'boolean' },
+          forceCreation: { type: 'boolean' }
+        }
+      }
+    }
+  },
+  'dependencies': ['templates', 'data', 'chrome-pdf'],
   'hasPublicPart': false,
   'skipInExeRender': true
 }

@@ -1,35 +1,39 @@
-var samples = require('../')
-var templates = require('jsreport-templates')
-var xlsx = require('jsreport-xlsx')
-var data = require('jsreport-data')
-var scripts = require('jsreport-scripts')
-var assets = require('jsreport-assets')
-var handlebars = require('jsreport-handlebars')
-var phantomPdf = require('jsreport-phantom-pdf')
-var jsreport = require('jsreport-core')
-var Promise = require('bluebird')
+const samples = require('../')
+const templates = require('jsreport-templates')
+const xlsx = require('jsreport-xlsx')
+const data = require('jsreport-data')
+const scripts = require('jsreport-scripts')
+const assets = require('jsreport-assets')
+const handlebars = require('jsreport-handlebars')
+const chromePdf = require('jsreport-chrome-pdf')
+const pdfUtils = require('jsreport-pdf-utils')
+const jsreport = require('jsreport-core')
+const Promise = require('bluebird')
 
 describe('sample', function () {
-  var reporter
+  let reporter
 
-  beforeEach(function () {
-    reporter = jsreport()
+  beforeEach(() => {
+    reporter = jsreport({ templatingEngines: { strategy: 'in-process' } })
     reporter.use(templates())
     reporter.use(data())
     reporter.use(xlsx())
     reporter.use(scripts({allowedModules: '*'}))
     reporter.use(assets())
+    reporter.use(pdfUtils())
     reporter.use(handlebars())
-    reporter.use(phantomPdf())
+    reporter.use(chromePdf({
+      launchOptions: {
+        args: ['--no-sandbox']
+      }
+    }))
     reporter.use(samples({createSamples: true}))
 
     return reporter.init()
   })
 
-  it('should be able to render all sample templates', function () {
-    var reports = ['Invoice', 'Orders', 'Population']
-    return Promise.all(reports.map(function (t) {
-      return reporter.render({ template: { name: t } })
-    }))
+  it('should be able to render all sample templates', () => {
+    const reports = ['Invoice', 'Orders', 'Population']
+    return Promise.all(reports.map((t) => reporter.render({ template: { name: t } })))
   })
 })
