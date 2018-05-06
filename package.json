@@ -55,5 +55,8 @@
     "index.js",
     "samples.json",
     "jsreport.config.js"
-  ]
+  ],
+  "engines": {
+    "node": ">=8.9"
+  }
 }
