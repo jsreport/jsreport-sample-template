@@ -1,4 +1,4 @@
-<!-- 
+<!--
 More complex example demonstrating advanced features like
 - using custom server script to fetch remote data
 - using custom modules in safe sandbox
@@ -6,8 +6,8 @@ More complex example demonstrating advanced features like
 - using global helpers
 - merging custom dynamic header for each individual page
 
-Note: This example requires jsreport to be configured with 
-{ "renderingSource": "trusted" } or
+Note: This example requires jsreport to be configured with
+{ "allowLocalFilesAccess": true } or
 { "extensions": { "scripts": { "allowedModules": ["http"] } } }
 !-->
 <html>
@@ -42,15 +42,15 @@ Note: This example requires jsreport to be configured with
                 {{/each}}
             </tbody>
         </table>
-        
-        <script>      
+
+        <script>
             // convert data into js string using function from asset global helpers.js
             // this results into something like var data = { "a": "foo" }
             // which gets afterwards interpreted in chrome into object
             var data = {{{toJSON accumulated}}}
-            
+
             Chart.defaults.global.legend.display = false;
-            
+
             new Chart(orders{{country}}.getContext("2d"), {
                 type: 'bar',
                 data: {
@@ -74,12 +74,9 @@ Note: This example requires jsreport to be configured with
                     }
                 }
             });
-        </script> 
+        </script>
         <div style='page-break-after: always;'>
         </div>
     {{/each}}
   </body>
 </html>
-
-
-
