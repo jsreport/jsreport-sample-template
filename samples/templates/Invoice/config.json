@@ -14,6 +14,7 @@
     },
     "_id": "7xektV4PFTzCbEMm",
     "chrome": {
+        "printBackground": true,
         "marginTop": "1cm",
         "marginRight": "1cm",
         "marginBottom": "1cm",

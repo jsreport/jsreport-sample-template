@@ -10,6 +10,7 @@
     "_id": "ueOyEfJc0mTf65HH",
     "$entitySet": "templates",
     "chrome": {
+        "printBackground": true,
         "marginTop": "1.5cm",
         "marginRight": "1.5cm",
         "marginLeft": "1.cm",
