@@ -1,14 +1,11 @@
 // server side script fetching remote data and preparing report data source
-const http = require('http');
+const https = require('https');
 
 // call remote http rest api
 function fetchOrders() {
     return new Promise((resolve, reject) => {
-        http.get({
-            hostname: 'services.odata.org',
-            port: 80,
-            path: `/V4/Northwind/Northwind.svc/Orders`,
-        }, (result) => {
+        https.get('https://services.odata.org/V4/Northwind/Northwind.svc/Orders',
+        (result) => {
             var str = '';
             result.on('data', (b) => str += b);
             result.on('error', reject);
