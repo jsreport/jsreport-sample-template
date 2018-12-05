@@ -7,7 +7,7 @@ logs
 pids
 *.pid
 *.seed
-data
+/data
 dev.config.json
 prod.config.json
 
