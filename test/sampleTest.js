@@ -46,7 +46,7 @@ describe('sample', function () {
 
     for (let n of reports) {
       const folder = await reporter.folders.resolveFolderFromPath(`/${n}/main`)
-      const template = await reporter.documentStore.collection('templates').findOne({ name: 'main', folder: { shortid: folder.shortid } })
+      const template = await reporter.documentStore.collection('templates').findOne({ name: `${n.toLowerCase()}-main`, folder: { shortid: folder.shortid } })
       await reporter.render({ template: { shortid: template.shortid } })
     }
   })
