@@ -10,7 +10,7 @@
     },
     "shortid": "r18kyD83ce",
     "$entitySet": "templates",
-    "name": "main",
+    "name": "population-main",
     "content": "{{xlsxRemove \"xl/worksheets/sheet1.xml\" \"worksheet.sheetData[0].row\" 1}}\r\n\r\n{{#each people}}\r\n{{#xlsxAdd \"xl/worksheets/sheet1.xml\" \"worksheet.sheetData[0].row\"}}\r\n<row>\r\n    <c t=\"inlineStr\" s=\"{{@root.$removedItem.c.[0].$.s}}\"><is><t>{{name}}</t></is></c>\r\n    <c t=\"inlineStr\" s=\"{{@root.$removedItem.c.[1].$.s}}\"><is><t>{{gender}}</t></is></c>\r\n    <c s=\"{{@root.$removedItem.c.[2].$.s}}\"><v>{{age}}</v></c>\r\n</row>\r\n{{/xlsxAdd}}\r\n{{/each}}\r\n\r\n{{{xlsxPrint}}}\r\n",
     "helpers": "",
     "folder": {

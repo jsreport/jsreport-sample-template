@@ -11,7 +11,7 @@ incoming API request.
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <style>
-            {#asset styles.css @encoding=utf8}
+            {#asset invoice-styles.css @encoding=utf8}
         </style>
     </head>
     <body>
@@ -22,7 +22,7 @@ incoming API request.
                         <table>
                             <tr>
                                 <td class="title">
-                                    <img src="{#asset logo.png @encoding=dataURI}" style="width:100%; max-width:300px;" />
+                                    <img src="{#asset invoice-logo.png @encoding=dataURI}" style="width:100%; max-width:300px;" />
                                 </td>
                                 <td>
                                     Invoice #: {{number}}

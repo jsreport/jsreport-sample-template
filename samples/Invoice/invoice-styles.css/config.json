@@ -1,7 +1,7 @@
 {
     "shortid": "ByKOCF3cg",
     "$entitySet": "assets",
-    "name": "styles.css",
+    "name": "invoice-styles.css",
     "content": {
         "type": "Buffer",
         "data": [

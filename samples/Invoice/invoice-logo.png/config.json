@@ -1,7 +1,7 @@
 {
     "shortid": "SkKBCK39l",
     "$entitySet": "assets",
-    "name": "logo.png",
+    "name": "invoice-logo.png",
     "content": {
         "type": "Buffer",
         "data": [
