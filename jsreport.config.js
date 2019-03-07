@@ -8,6 +8,7 @@ module.exports = {
         type: 'object',
         properties: {
           createSamples: { type: 'boolean' },
+          skipCreateSamplesModal: { type: 'boolean', default: false },
           forceCreation: { type: 'boolean' }
         }
       }
