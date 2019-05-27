@@ -59,6 +59,7 @@
   },
   "files": [
     "lib",
+    "studio",
     "index.js",
     "samples.json",
     "jsreport.config.js"
