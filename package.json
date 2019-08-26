@@ -47,6 +47,7 @@
     "jsreport-data": "2.1.0",
     "jsreport-fs-store": "2.4.1",
     "jsreport-handlebars": "2.0.2",
+    "jsreport-html-to-xlsx": "2.3.1",
     "jsreport-pdf-utils": "1.4.0",
     "jsreport-scripts": "2.1.0",
     "jsreport-studio-dev": "1.4.0",

@@ -2,6 +2,7 @@ const samples = require('../')
 const fsStore = require('jsreport-fs-store')
 const templates = require('jsreport-templates')
 const xlsx = require('jsreport-xlsx')
+const htmlToXlsx = require('jsreport-html-to-xlsx')
 const data = require('jsreport-data')
 const scripts = require('jsreport-scripts')
 const assets = require('jsreport-assets')
@@ -15,6 +16,7 @@ describe('sample', function () {
 
   beforeEach(() => {
     reporter = jsreport({
+      allowLocalFilesAccess: true,
       store: { provider: 'fs' },
       templatingEngines: { strategy: 'in-process' }
     })
@@ -22,6 +24,7 @@ describe('sample', function () {
     reporter.use(templates())
     reporter.use(data())
     reporter.use(xlsx())
+    reporter.use(htmlToXlsx())
     reporter.use(scripts({allowedModules: '*'}))
     reporter.use(assets())
     reporter.use(pdfUtils())
@@ -42,7 +45,7 @@ describe('sample', function () {
   })
 
   it('should be able to render all sample templates', async () => {
-    const reports = ['Invoice', 'Orders', 'Population']
+    const reports = ['Invoice', 'Orders', 'Sales']
 
     for (let n of reports) {
       const folder = await reporter.folders.resolveFolderFromPath(`/${n}/main`)
