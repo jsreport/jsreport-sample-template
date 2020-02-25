@@ -10,11 +10,14 @@ const handlebars = require('jsreport-handlebars')
 const chromePdf = require('jsreport-chrome-pdf')
 const pdfUtils = require('jsreport-pdf-utils')
 const jsreport = require('jsreport-core')
+const rimraf = require('rimraf')
+const path = require('path')
 
 describe('sample', function () {
   let reporter
 
   beforeEach(() => {
+    rimraf.sync(path.join(__dirname, '../data'))
     reporter = jsreport({
       allowLocalFilesAccess: true,
       store: { provider: 'fs' },
@@ -25,7 +28,7 @@ describe('sample', function () {
     reporter.use(data())
     reporter.use(xlsx())
     reporter.use(htmlToXlsx())
-    reporter.use(scripts({allowedModules: '*'}))
+    reporter.use(scripts({ allowedModules: '*' }))
     reporter.use(assets())
     reporter.use(pdfUtils())
     reporter.use(handlebars())
@@ -35,7 +38,7 @@ describe('sample', function () {
       }
     }))
     reporter.use(fsStore())
-    reporter.use(samples({createSamples: true}))
+    reporter.use(samples({ createSamples: true }))
 
     return reporter.init()
   })
@@ -47,7 +50,7 @@ describe('sample', function () {
   it('should be able to render all sample templates', async () => {
     const reports = ['Invoice', 'Orders', 'Sales']
 
-    for (let n of reports) {
+    for (const n of reports) {
       const folder = await reporter.folders.resolveFolderFromPath(`/${n}/main`)
       const template = await reporter.documentStore.collection('templates').findOne({ name: `${n.toLowerCase()}-main`, folder: { shortid: folder.shortid } })
       await reporter.render({ template: { shortid: template.shortid } })

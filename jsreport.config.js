@@ -1,8 +1,8 @@
 
 module.exports = {
-  'name': 'sample-template',
-  'main': 'lib/sample.js',
-  'optionsSchema': {
+  name: 'sample-template',
+  main: 'lib/sample.js',
+  optionsSchema: {
     extensions: {
       'sample-template': {
         type: 'object',
@@ -14,7 +14,7 @@ module.exports = {
       }
     }
   },
-  'dependencies': ['templates', 'data', 'chrome-pdf'],
-  'hasPublicPart': false,
-  'skipInExeRender': true
+  dependencies: ['templates', 'data', 'chrome-pdf'],
+  hasPublicPart: false,
+  skipInExeRender: true
 }

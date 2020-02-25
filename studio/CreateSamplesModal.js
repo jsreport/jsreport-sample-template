@@ -29,7 +29,7 @@ export default class CreateSamplesModal extends Component {
       creating: true
     })
 
-    await Studio.api.post(`/studio/create-samples`, {
+    await Studio.api.post('/studio/create-samples', {
       data: {
         ignore
       }
