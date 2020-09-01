@@ -1,13 +1,7 @@
-import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import Studio from 'jsreport-studio'
 
-export default class CreateSamplesModal extends Component {
-  static propTypes = {
-    close: PropTypes.func.isRequired,
-    options: PropTypes.object.isRequired
-  }
-
+class CreateSamplesModal extends Component {
   constructor (props) {
     super(props)
 
@@ -70,3 +64,5 @@ export default class CreateSamplesModal extends Component {
     )
   }
 }
+
+export default CreateSamplesModal
