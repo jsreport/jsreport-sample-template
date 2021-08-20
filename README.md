@@ -1,3 +1,6 @@
+**⚠️ This repository has been moved to the monorepo [jsreport/jsreport](https://github.com/jsreport/jsreport)**
+--
+
 # jsreport-sample-template
 [![NPM Version](http://img.shields.io/npm/v/jsreport-sample-template.svg?style=flat-square)](https://npmjs.com/package/jsreport-sample-template)
 [![Build Status](https://travis-ci.org/jsreport/jsreport-sample-template.png?branch=master)](https://travis-ci.org/jsreport/jsreport-sample-template)
